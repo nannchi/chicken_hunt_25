@@ -1,0 +1,21 @@
+#BlueJ class context
+comment0.target=ChickenHunt
+comment0.text=\nName\:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Chimamanda\ Ndu-Onyeaso\nClass\:\ \ \ \ \ \ \ \ \ \ \ \ \ \ APCS-A\ Section\ 1\nProgram\ Name\:\ \ \ \ \ \ \ Module\ Sixteen\ Lesson\ Two\ Assignment\ (Final\ project\ Demo)\nDate\:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 10.5.22\n\n\nDescription\:\ This\ program\ is\ a\ text-based\ adventure\ game,\ in\ which\ a\ new\ farmer\ cares\ after\ and\ befriends\ chickens.\nWhat\ I\ learned\:\ I\ learned\ how\ to\ apply\ all\ the\ concepts\ I\ learned\ throughout\ this\ course\ in\ a\ game.\nDifficulties\ encountered\ and\ how\ they\ were\ solved\:\n\ One\ difficulty\ that\ I\ encountered\ was\ how\ to\ account\ for\ dying\ in\ game.\n\ To\ solve\ this\ I\ extended\ the\ Exception\ class\ to\ create\ a\ Death\ subclass,\ which\ stops\ the\ code\ and\ prints\ the\ death\ text.\n
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment2.params=
+comment2.target=int\ getPopularity()
+comment2.text=\ \n\ gets\ the\ happy\ level\n
+comment3.params=agg
+comment3.target=void\ xpInc(double)
+comment3.text=\nincreasing\ experience
+comment4.params=
+comment4.target=java.lang.String\ stats()
+comment4.text=\n\ gets\ the\ current\ stats\ as\ a\ string\n
+comment5.params=menu
+comment5.target=void\ printMenu(java.lang.String[])
+comment5.text=\n\ prints\ a\ given\ menu\n
+comment6.params=aggr
+comment6.target=void\ populAdjust(double)
+comment6.text=\n\ adjusts\ the\ farm\ based\ on\ the\ agressiveness\ of\ teh\ chicken\n
+numComments=7
