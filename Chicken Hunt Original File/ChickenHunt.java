@@ -1037,6 +1037,7 @@ public class ChickenHunt //Top of page
         do { keepS = ui.nextLine(); } while (!keepS.equals(""));
         
         System.out.println(stats());
+        ui.close();
         
         }
         else System.out.println("*You decided chicken farming is not for you*");    
@@ -1044,6 +1045,7 @@ public class ChickenHunt //Top of page
         else System.out.println("*You decided chicken farming is not for you*");
         }
         else System.out.println("*You decided chicken farming is not for you*");
+        
     }
     
     

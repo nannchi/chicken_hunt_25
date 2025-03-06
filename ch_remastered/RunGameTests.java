@@ -8,7 +8,6 @@ public class RunGameTests{
         System.out.println("TESTS newSave(String name)");
         Scanner userInput = new Scanner(System.in);
 
-        
         //newSave selected:
         RunGame.newSave(userInput.nextLine());
         userInput.close();

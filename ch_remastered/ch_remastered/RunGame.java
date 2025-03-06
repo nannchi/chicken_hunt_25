@@ -1,6 +1,8 @@
 package ch_remastered;
+
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -9,26 +11,9 @@ public class RunGame {
     public static String curSave;
     public static ArrayList<String> saveDetails = new ArrayList<>();
 
-
-
-    public static void main(String[] args) throws IOException {
-        Scanner userInput = new Scanner(System.in);
-
-        
-        //newSave selected:
-        //newSave(userInput.nextLine());
-        //userInput.close();
-
-        //loadSave selected:
-        loadSave(userInput.nextLine());
-        userInput.close();
-
-         
-    }
-
     /**
      * Creates a new save if the save name doesn't exist
-     * @param name
+     * @param name name of file
      * @throws IOException
      */
     public static void newSave(String name) throws IOException {
@@ -36,13 +21,17 @@ public class RunGame {
         if (!newSave.exists()) {
             newSave.createNewFile();
             System.out.println("file: ch_remastered/SAVEDATA"+"/"+name+".txt has been created");
-            curSave = "ch_remastered/SAVEDATA"+"/"+name;
+            curSave = "ch_remastered/SAVEDATA"+"/"+name+".txt";
         }
         else {
             System.out.println("ERROR: file: ch_remastered/SAVEDATA"+"/"+name+".txt already exists\nPlease select load save to play this save.");
         }
     }
 
+    /**
+     * loads a save file
+     * @param name name of file
+     */
     public static void loadSave(String name) {
         File saveFile = new File("ch_remastered/SAVEDATA"+"/"+name+".txt"); 
         if (!saveFile.exists()) {
@@ -56,8 +45,23 @@ public class RunGame {
                     System.out.println(bool);
                 }
                 fileReader.close();
+                curSave = "ch_remastered/SAVEDATA"+"/"+name+".txt";
             } catch (FileNotFoundException e) {
                 System.out.println("ERROR: file: ch_remastered/SAVEDATA"+"/"+name+".txt doesn't exists\nPlease select new save to play.");
+            }
+        }
+    }
+
+    public static void saveProgress(boolean fork) {
+        if (fork == false) {
+            FileWriter f = new FileWriter(new File(curSave));
+            for (String string : saveDetails) {
+                try {
+                    f.append(string + " ");
+                } catch (IOException e) {
+                    Sytem.out.println("FATAL ERROR, not able to save");
+                }
+                
             }
         }
     }
