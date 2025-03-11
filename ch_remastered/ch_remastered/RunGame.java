@@ -52,17 +52,24 @@ public class RunGame {
         }
     }
 
-    public static void saveProgress(boolean fork) {
-        if (fork == false) {
-            FileWriter f = new FileWriter(new File(curSave));
+    /**
+     * updates savefile
+     */
+    public static void saveProgress(){
+        FileWriter f;
+        try {
+            f = new FileWriter(new File(curSave));
             for (String string : saveDetails) {
                 try {
                     f.append(string + " ");
                 } catch (IOException e) {
-                    Sytem.out.println("FATAL ERROR, not able to save");
+                    System.out.println("FATAL ERROR, not able to save");
                 }
                 
             }
+                f.close();
+        } catch (IOException e) {
+            System.out.println("Fatal Error: Save did not work");
         }
     }
 }

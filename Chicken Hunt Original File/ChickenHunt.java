@@ -1,6 +1,4 @@
 import java.util.Scanner;
-import java.util.Arrays;
-
 /**
 Name:               Chimamanda Ndu-Onyeaso
 Class:              APCS-A Section 1
@@ -36,6 +34,7 @@ public class ChickenHunt //Top of page
     
     
     public static void main(String[] args) throws Death {
+        @SuppressWarnings("resource")
         Scanner ui = new Scanner(System.in);
         String keepS;
         int keepI;
