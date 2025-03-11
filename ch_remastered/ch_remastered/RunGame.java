@@ -16,16 +16,18 @@ public class RunGame {
      * @param name name of file
      * @throws IOException
      */
-    public static void newSave(String name) throws IOException {
+    public static String newSave(String name) throws IOException {
         File newSave = new File("ch_remastered/SAVEDATA"+"/"+name+".txt");        
         if (!newSave.exists()) {
             newSave.createNewFile();
             System.out.println("file: ch_remastered/SAVEDATA"+"/"+name+".txt has been created");
             curSave = "ch_remastered/SAVEDATA"+"/"+name+".txt";
+
         }
         else {
-            System.out.println("ERROR: file: ch_remastered/SAVEDATA"+"/"+name+".txt already exists\nPlease select load save to play this save.");
+            curSave = "ch_remastered/SAVEDATA"+"/"+name+".txt";
         }
+        return curSave;
     }
 
     /**
