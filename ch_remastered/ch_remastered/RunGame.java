@@ -34,7 +34,7 @@ public class RunGame {
      */
     public static void loadSave(String name) {
         File saveFile = new File("ch_remastered/SAVEDATA"+"/"+name+".txt"); 
-        if (!saveFile.exists()) {
+        if (saveFile.exists()) {
             Scanner fileReader;
             try {
                 fileReader = new Scanner(saveFile);
@@ -44,6 +44,7 @@ public class RunGame {
                 for (String bool : saveDetails) {
                     System.out.println(bool);
                 }
+                System.out.println("Save Loaded");
                 fileReader.close();
                 curSave = "ch_remastered/SAVEDATA"+"/"+name+".txt";
             } catch (FileNotFoundException e) {

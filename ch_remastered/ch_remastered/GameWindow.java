@@ -1,30 +1,98 @@
 package ch_remastered;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
 import javax.swing.*;
 
 
 public class GameWindow {
-    public static void main(String[] args)
+    JButton bNewG, bLoadG;
+    JFrame wGameWindow, wPopUp;
+    public void showGUI()
     {
         // Creating instance of JFrame
-        JFrame frame = new JFrame();
+        wGameWindow = new JFrame();
+        bNewG = new JButton("New Game");
+        bLoadG = new JButton("Load Game");
 
-        // Creating instance of JButton
-        JButton button = new JButton(" GFG WebSite Click");
+        /**
+         * lines 20-75 all relate to the "home screen" buttons and loading mechanism
+         */
+        bNewG.setBounds(150, 200, 220, 50);
+        wGameWindow.add(bNewG);
+        bNewG.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Action 1
+                JTextArea gameName = new JTextArea(1, 20);
+                gameName.getDocument().putProperty("filterNewlines", Boolean.TRUE);
+                gameName.setBounds(150, 260, 220, 50);
+                bLoadG.setVisible(false);
+                //revalidate() and repaint()
+                wGameWindow.revalidate();
+                wGameWindow.repaint();
 
-        // x axis, y axis, width, height
-        button.setBounds(150, 200, 220, 50);
+                wGameWindow.add(gameName);
+                bNewG.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        try {
+                            RunGame.newSave(gameName.getText());
+                        } catch (IOException e1) {
+                        }
+                        wGameWindow.remove(gameName);
+                        bNewG.setVisible(false);
+                        wGameWindow.revalidate();
+                        wGameWindow.repaint();
+                    }
+                });
+                    
+                
+            }
+        });
+        bLoadG.setBounds(150, 260, 220, 50);
+        wGameWindow.add(bLoadG);
+        bLoadG.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JTextArea gameName = new JTextArea(1, 20);
+                gameName.getDocument().putProperty("filterNewlines", Boolean.TRUE);
+                gameName.setBounds(150, 260, 220, 50);
+                bLoadG.setBounds(150, 200, 220, 50);
+                bNewG.setVisible(false);
+                //revalidate() and repaint()
+                wGameWindow.revalidate();
+                wGameWindow.repaint();
 
-        // adding button in JFrame
-        frame.add(button);
+                wGameWindow.add(gameName);
+                bLoadG.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        RunGame.loadSave(gameName.getText());
+                        wGameWindow.remove(gameName);
+                        bLoadG.setVisible(false);
+                        wGameWindow.revalidate();
+                        wGameWindow.repaint();
+                    }
+                    
+                });
+            }
+        });
+
 
         // 400 width and 500 height
-        frame.setSize(500, 600);
+        wGameWindow.setSize(500, 600);
+        wGameWindow.setLocationRelativeTo(null);
+        
 
         // using no layout managers
-        frame.setLayout(null);
+        wGameWindow.setLayout(null);
 
         // making the frame visible
-        frame.setVisible(true);
+        wGameWindow.setVisible(true);
+        wGameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-    
+
+
+    public static void main(String args[]) {
+        GameWindow yo = new GameWindow();
+        yo.showGUI();
+    }
 }
