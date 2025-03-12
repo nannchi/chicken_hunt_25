@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 public class RunGame {
     public static String curSave;
-    public static ArrayList<String> saveDetails = new ArrayList<>();
 
     /**
      * Creates a new save if the save name doesn't exist
@@ -43,17 +42,11 @@ public class RunGame {
      * updates savefile
      */
     public static void saveProgress(){
+        String saveDetails = GameData.toFile();
         FileWriter f;
         try {
             f = new FileWriter(new File(curSave));
-            for (String string : saveDetails) {
-                try {
-                    f.append(string + " ");
-                } catch (IOException e) {
-                    System.out.println("FATAL ERROR, not able to save");
-                }
-                
-            }
+            f.append(saveDetails);
                 f.close();
         } catch (IOException e) {
             System.out.println("Fatal Error: Save did not work");
