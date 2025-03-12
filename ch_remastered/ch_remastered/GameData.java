@@ -1,20 +1,22 @@
 package ch_remastered;
 
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 public class GameData {
 
     /*************STATIC VARS**************/
 
-    private static String playerName;
-    private static int level = 1;
-    private static int exp = 0;
-    private static int monies = 500;
-    private static int chickens = 1;
-    private static int pacer = 0;
+        private static String playerName;
+        private static int level = 1;
+        private static int exp = 0;
+        private static int monies = 500;
+        private static int chickens = 1;
+        private static int pacer = 0;
 
 
 

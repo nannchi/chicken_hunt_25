@@ -1,9 +1,71 @@
-bCont.addActionListener(new ActionListener() {
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        gameText.setText("[DEVELOPER NOTES: NAMING YOUR FARMER]");
-        gameWindow.revalidate();
-        gameWindow.repaint();
-        
-    }
-});
+
+public void startingGUI()
+        {
+
+            //lSave Name setup
+                lSaveName.setBounds(10, 10, 100, 100);
+                lSaveName.setAlignmentX(SwingConstants.RIGHT);
+                lSaveName.setEditable(false);
+                lSaveName.setLineWrap(true);
+                lSaveName.setWrapStyleWord(true);
+
+
+            //menu setup
+                menu.add(lSaveName);
+                menu.setBounds(600, 30, 100, 200);
+                menu.setVisible(false);
+                bToggleMenu.setBounds(600, 0, 100, 30);
+                if (!menuToggledBool) { //menu actions
+                    bToggleMenu.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            menu.setVisible(true);
+                            gameWindow.revalidate();
+                            gameWindow.repaint();
+                            menuToggledBool = true;
+                            bToggleMenu.addActionListener(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent e) {
+                                    menu.setVisible(false);
+                                    gameWindow.revalidate();
+                                    gameWindow.repaint();
+                                    menuToggledBool = false;
+                                }
+                            });
+                        }
+                    });
+                }
+
+            //gameWindow setup
+                gameWindow.setSize(700,500);
+                gameWindow.setLocationRelativeTo(null);
+                gameWindow.setBackground(bgYellow);
+
+            
+                //starting game code
+                    JButton bPlay = new JButton("Play");
+                    bPlay.setBounds(SwingConstants.CENTER + 1/2 * 100, 200, 100, 50);
+                    bPlay.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            if(!gameStartedBool) {
+                                gameStartedBool = true;
+                                gameWindow.remove(bPlay);
+                                gameWindow.revalidate();
+                                gameWindow.repaint();
+                                beginingCutSceneGui();
+                            }
+                        }
+                        
+                    });
+
+            
+            
+            //gamewindow initial set up
+                gameWindow.add(bToggleMenu);
+                gameWindow.add(menu);
+                gameWindow.add(bPlay);
+                gameWindow.setLayout(null);
+                gameWindow.setVisible(true);
+                gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        }
