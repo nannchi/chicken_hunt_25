@@ -20,6 +20,7 @@ public class GameWindow {
 
     JButton bToggleMenu = new JButton("Toggle Menu");
     boolean menuToggledBool = false;
+    JButton bSaveButton = new JButton("Save Game");
 
     JTextArea userIn = new JTextArea(1, 20);
     JTextArea lSaveName = new JTextArea();
@@ -30,6 +31,33 @@ public class GameWindow {
     
     JTextArea gameText = new JTextArea(4, 30);
     int pacer = 0;
+    private final String[] DIALOGUECS1 = {
+        "*You're discussing your dream of starting a new chicken farm with your good ole pal Frank*",
+        "~Frank:: Say there....~",
+        "[NAMING YOUR FARMER]",
+        "+...+",
+        "+...+",
+        "+...+",
+        "+...Its [NAME]...+",
+        "+Frank, we've known each other for decades....+",
+        "+You were my best man at all 5 of my weddings?*",
+        "~Frank:: Right.....~",
+        "+You're my best friend?????????????????+",
+        "~Frank:: And I don't doubt that, [NAME]~",
+        "~Frank:: Anyways buddy, you've been a....~",
+        "~Frank:: A......~",
+        "~Frank:: A-~",
+        "[CHOOSE FORMER OCCUPATION]",
+        "+FRANK I'VE BEEN A [OCCUPATION] FOR THE PAST TWENTY YEARS+",
+        "+WE WORK TOGETHER??????+",
+        "~Frank:: Oh...~",
+        "~Frank:: RIGHT!~",
+        "~Frank:: So why throw it all away?~",
+        "*You begin to tell him all the reasons why, but before you can get to the climax, Frank interrupts you*",
+        "~Frank:: I can respect that~",
+        "*You decide to quit your job to be a chicken farmer despite Frank's vehement objections*"
+    };
+    
 
     JFrame homeWindow = new JFrame(), wPopUp = new JFrame(), gameWindow = new JFrame();
     
@@ -165,7 +193,7 @@ public class GameWindow {
                     gameWindow.remove(bPlay);
                     gameWindow.revalidate();
                     gameWindow.repaint();
-                    tutorialGUI();
+                    beginingCutSceneGui();
                 }
             }
             
@@ -185,7 +213,7 @@ public class GameWindow {
         gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public void tutorialGUI() {
+    public void beginingCutSceneGui() {
         
         //set-up 
         bCont.setBounds(425,410 , 220, 50);
@@ -193,9 +221,10 @@ public class GameWindow {
         gameText.setFont(defaultFont);
         gameText.setLineWrap(true);
         gameText.setWrapStyleWord(true);
+        pacer = 0;
 
-
-        gameText.setText("*You're discussing your dream of starting a new chicken farm with your good ole pal Frank*");
+        gameText.setText(DIALOGUECS1[pacer]);
+        pacer++;
 
         gameText.setEditable(false);
         gameText.setVisible(true);
@@ -204,30 +233,19 @@ public class GameWindow {
         gameWindow.revalidate();
         gameWindow.repaint();
 
-        pacer = 0;
+        
         bCont.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (pacer == 0) {
-                    gameText.setText("~Frank:: Say there....~");
-                } else if (pacer == 1) {
-                    gameText.setText("[NAMING YOUR FARMER]");
-                } else if (pacer == 2) {
-                    gameText.setText("+...+");
-                } else if (pacer == 3) {
-                    gameText.setText("+...+");
-                } else if (pacer == 4) {
-                    gameText.setText("+...+");
-                } else if (pacer == 5) {
-                    gameText.setText("+...Its [NAME]...+");
-                }
+                gameText.setText(DIALOGUECS1[pacer]);
                 pacer++; // Increment the pacer each time
                 gameWindow.revalidate();
                 gameWindow.repaint();
-            }
+            }             
         });
-        
-        
+    }
+
+    public void tutorialGUI() {
 
     }
     

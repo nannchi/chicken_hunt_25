@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class RunGame {
     public static String curSave;
@@ -26,6 +25,7 @@ public class RunGame {
         }
         else {
             curSave = "ch_remastered/SAVEDATA"+"/"+name+".txt";
+            loadSave(curSave);
         }
         return curSave;
     }
@@ -33,26 +33,10 @@ public class RunGame {
     /**
      * loads a save file
      * @param name name of file
+     * @throws FileNotFoundException 
      */
-    public static void loadSave(String name) {
-        File saveFile = new File("ch_remastered/SAVEDATA"+"/"+name+".txt"); 
-        if (saveFile.exists()) {
-            Scanner fileReader;
-            try {
-                fileReader = new Scanner(saveFile);
-                while (fileReader.hasNext()) {
-                    saveDetails.add(fileReader.next());
-                }
-                for (String bool : saveDetails) {
-                    System.out.println(bool);
-                }
-                System.out.println("Save Loaded");
-                fileReader.close();
-                curSave = "ch_remastered/SAVEDATA"+"/"+name+".txt";
-            } catch (FileNotFoundException e) {
-                System.out.println("ERROR: file: ch_remastered/SAVEDATA"+"/"+name+".txt doesn't exists\nPlease select new save to play.");
-            }
-        }
+    public static void loadSave(String name) throws FileNotFoundException {
+        GameData.parseFile(new File(name));
     }
 
     /**
