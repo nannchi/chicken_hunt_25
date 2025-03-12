@@ -1,0 +1,9 @@
+bCont.addActionListener(new ActionListener() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        gameText.setText("[DEVELOPER NOTES: NAMING YOUR FARMER]");
+        gameWindow.revalidate();
+        gameWindow.repaint();
+        
+    }
+});

@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
@@ -12,6 +13,8 @@ import javax.swing.*;
 
 
 public class GameWindow {
+    Font defaultFont = new Font("Monospace", Font.PLAIN, 18);
+
     JButton bNewG;
     JButton bCont = new JButton("Continue");
 
@@ -25,7 +28,8 @@ public class GameWindow {
     boolean gameStartedBool;
     JPanel gamePanel = new JPanel();
     
-    JTable gameText;
+    JTextArea gameText = new JTextArea(4, 30);
+    int pacer = 0;
 
     JFrame homeWindow = new JFrame(), wPopUp = new JFrame(), gameWindow = new JFrame();
     
@@ -152,8 +156,6 @@ public class GameWindow {
         ////////GAME CODE/////////////
         //should be a button start play:
         JButton bPlay = new JButton("Play");
-        String[][] gameTextUpdater = {};
-        String[] speakingCur = {};
         bPlay.setBounds(SwingConstants.CENTER + 1/2 * 100, 200, 100, 50);
         bPlay.addActionListener(new ActionListener() {
             @Override
@@ -163,25 +165,13 @@ public class GameWindow {
                     gameWindow.remove(bPlay);
                     gameWindow.revalidate();
                     gameWindow.repaint();
+                    tutorialGUI();
                 }
             }
             
         });
 
-        if (gameStartedBool) {
-            //BEGINNING CUT SCENE
-            bCont.setBounds(SwingConstants.CENTER + 1/2*100, SwingConstants.BOTTOM - 100, 100, 50);
-            gameTextUpdater[0][0] = "*You're discussing your dream of starting a new chicken farm with your good ole pal Frank*";
-            speakingCur[0] = "Narrator";
-            gameText = new JTable(gameTextUpdater, speakingCur);
-            gameText.setBounds(30, 40, 200, 300);
-            gameText.setVisible(true);
-            gameWindow.add(gameText);
-            gameWindow.add(bCont);
-            gameWindow.revalidate();
-            gameWindow.repaint();
-
-        }
+        
         
         
         gameWindow.add(bToggleMenu);
@@ -194,6 +184,53 @@ public class GameWindow {
         gameWindow.setVisible(true);
         gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
+
+    public void tutorialGUI() {
+        
+        //set-up 
+        bCont.setBounds(425,410 , 220, 50);
+        gameText.setBounds(10, 250, 680, 150);
+        gameText.setFont(defaultFont);
+        gameText.setLineWrap(true);
+        gameText.setWrapStyleWord(true);
+
+
+        gameText.setText("*You're discussing your dream of starting a new chicken farm with your good ole pal Frank*");
+
+        gameText.setEditable(false);
+        gameText.setVisible(true);
+        gameWindow.add(gameText);
+        gameWindow.add(bCont);
+        gameWindow.revalidate();
+        gameWindow.repaint();
+
+        pacer = 0;
+        bCont.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (pacer == 0) {
+                    gameText.setText("~Frank:: Say there....~");
+                } else if (pacer == 1) {
+                    gameText.setText("[NAMING YOUR FARMER]");
+                } else if (pacer == 2) {
+                    gameText.setText("+...+");
+                } else if (pacer == 3) {
+                    gameText.setText("+...+");
+                } else if (pacer == 4) {
+                    gameText.setText("+...+");
+                } else if (pacer == 5) {
+                    gameText.setText("+...Its [NAME]...+");
+                }
+                pacer++; // Increment the pacer each time
+                gameWindow.revalidate();
+                gameWindow.repaint();
+            }
+        });
+        
+        
+
+    }
+    
 
     public int xCenter(JFrame frame) {
         return (frame.getWidth()/2);
