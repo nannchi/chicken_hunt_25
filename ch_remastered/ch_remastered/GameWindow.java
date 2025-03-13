@@ -1,7 +1,6 @@
 package ch_remastered;
 
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -12,7 +11,6 @@ import java.io.File;
 import java.io.IOException;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-
 import ch_remastered.stylizers.Button;
 import ch_remastered.stylizers.colors.*;
 
@@ -58,7 +56,7 @@ public class GameWindow {
                 "+...+",
                 "+...Its [NAME]...+",
                 "+Frank, we've known each other for decades....+",
-                "+You were my best man at all 5 of my weddings?*",
+                "+You were my best man at all 5 of my weddings.*",
                 "~Frank:: Right.....~",
                 "+You're my best friend?????????????????+",
                 "~Frank:: And I don't doubt that, [NAME]~",
@@ -67,7 +65,7 @@ public class GameWindow {
                 "~Frank:: A-~",
                 "[CHOOSE FORMER OCCUPATION]\n 1. Office worker\n 2. Mechanic\n 3. IT Technician", //15
                 "+FRANK I'VE BEEN A [OCCUPATION] FOR THE PAST TWENTY YEARS+",
-                "+WE WORK TOGETHER??????+",
+                "+We literally work togther+",
                 "~Frank:: Oh...~",
                 "~Frank:: RIGHT!~",
                 "~Frank:: So why throw it all away?~",
@@ -148,7 +146,7 @@ public class GameWindow {
             };
             public final String[] DIALOGUE_CS3 = {  //CUT SCENE 3 DIALOGUE
                 "*You're shocked that after three years of no contact after his wedding, you becoming recognized by the greater metropolitan area of Cityville is all it takes for your good ole pal Frank to call you to catch up*",
-                "~Frank:: Look " + GameData.getPlayerName()+"...~",
+                "~Frank:: Look [NAME]...~",
                 "~Frank:: Don't take it too personally, but...~",
                 "*You tell him you will take it extremely personally*",
                 "~Frank:: ...Well...~",
@@ -474,7 +472,7 @@ public class GameWindow {
                         }
                     });
                 }
-                if (pacer == 24) {
+                if (pacer == 23) {
                     bCont. setVisible(false);
                     gameWindow.remove(bCont);
                     JButton bConfName = new Button("Tutorial");
