@@ -1,4 +1,4 @@
-package ch_remastered.stylizers;
+package ch_remastered.chickies;
 
 import java.awt.Font;
 import java.awt.FontFormatException;
@@ -10,7 +10,8 @@ import java.awt.geom.RoundRectangle2D;
 import java.io.File;
 import java.io.IOException;
 import javax.swing.JButton;
-import ch_remastered.stylizers.colors.CHColors;
+
+import ch_remastered.chickies.colors.CHColors;
 
 public class Button extends JButton{
 

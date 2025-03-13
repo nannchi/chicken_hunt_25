@@ -1,4 +1,4 @@
-package ch_remastered.stylizers.colors;
+package ch_remastered.chickies.colors;
 
 import java.awt.Color;
 

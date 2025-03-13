@@ -11,8 +11,10 @@ import java.io.File;
 import java.io.IOException;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import ch_remastered.stylizers.Button;
-import ch_remastered.stylizers.colors.*;
+
+import ch_remastered.chickies.Button;
+import ch_remastered.chickies.colors.*;
+import ch_remastered.chickies.Dialogues;
 
 
 public class GameWindow {
@@ -47,32 +49,6 @@ public class GameWindow {
 
         //ALL DIALOGUES
 
-            private final String[] DIALOGUE_CS1 = { //CUT SCENE 1 DIALOGUE
-                "*You're discussing your dream of starting a new chicken farm with your good ole pal Frank*",
-                "~Frank:: Say there....~",
-                "[NAME YOUR FARMER]", //2
-                "+...+",
-                "+...+",
-                "+...+",
-                "+...Its [NAME]...+",
-                "+Frank, we've known each other for decades....+",
-                "+You were my best man at all 5 of my weddings.*",
-                "~Frank:: Right.....~",
-                "+You're my best friend?????????????????+",
-                "~Frank:: And I don't doubt that, [NAME]~",
-                "~Frank:: Anyways buddy, you've been a....~",
-                "~Frank:: A......~",
-                "~Frank:: A-~",
-                "[CHOOSE FORMER OCCUPATION]\n 1. Office worker\n 2. Mechanic\n 3. IT Technician", //15
-                "+FRANK I'VE BEEN A [OCCUPATION] FOR THE PAST TWENTY YEARS+",
-                "+We literally work togther+",
-                "~Frank:: Oh...~",
-                "~Frank:: RIGHT!~",
-                "~Frank:: So why throw it all away?~",
-                "*You begin to tell him all the reasons why, but before you can get to the climax, Frank interrupts you*",
-                "~Frank:: I can respect that~",
-                "*You decide to quit your job to be a chicken farmer despite Frank's vehement objections*"
-            };
             public final String[] DIALOGUE_TS1 = { //TRAINING SCENE 1 DIALOGUE
                 "*A strange shadowy figure approaches you*",
                 "=Shadowy Figure:: Howdy there uhh.... um..=",
@@ -353,7 +329,7 @@ public class GameWindow {
             gameText.setBorder(new EmptyBorder(10, 15, 10, 15));
             pacer = 0;
 
-            typeWriter(DIALOGUE_CS1[pacer]);
+            typeWriter(Dialogues.DIALOGUE_CS1[pacer]);
             pacer++;
 
             gameText.setEditable(false);
@@ -391,7 +367,7 @@ public class GameWindow {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //gameText.setText(DIALOGUE_CS1[pacer]);
-                typeWriter(DIALOGUE_CS1[pacer]);
+                typeWriter(Dialogues.DIALOGUE_CS1[pacer]);
                 gameWindow.revalidate();
                 gameWindow.repaint();
                 //Important bits!!!
@@ -426,7 +402,7 @@ public class GameWindow {
                                 gameWindow.repaint();
 
                             //forcing updates
-                                GameWindow.forceUpdate(DIALOGUE_CS1);
+                                GameWindow.forceUpdate(Dialogues.DIALOGUE_CS1);
                                 GameWindow.forceUpdate(DIALOGUE_TS1);
                                 GameWindow.forceUpdate(DIALOGUE_CS2);
                                 GameWindow.forceUpdate(NEW_INFO_L2);
@@ -456,9 +432,9 @@ public class GameWindow {
                         public void actionPerformed(ActionEvent e) {
                             //forcing updates
                             if (isInteger(userIn.getText())) {
-                                GameWindow.forceUpdate(DIALOGUE_CS1,Integer.parseInt(userIn.getText()));
+                                GameWindow.forceUpdate(Dialogues.DIALOGUE_CS1,Integer.parseInt(userIn.getText()));
                             } else {
-                                GameWindow.forceUpdate(DIALOGUE_CS1,1000);
+                                GameWindow.forceUpdate(Dialogues.DIALOGUE_CS1,1000);
                             }
                             
 
@@ -504,6 +480,7 @@ public class GameWindow {
 
     public void tutorialGUI() {
         //bCont button stuff
+        pacer = 0;
         bCont.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
