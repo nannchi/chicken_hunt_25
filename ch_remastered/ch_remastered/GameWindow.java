@@ -11,6 +11,10 @@ import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
+import ch_remastered.stylizers.Button;
+import ch_remastered.stylizers.colors.*;
 
 
 public class GameWindow {
@@ -20,10 +24,8 @@ public class GameWindow {
             wPopUp = new JFrame(), 
             gameWindow = new JFrame();
 
-        //STYLE VARS
+        //STYLE VARS CAN MAYBE GET RID OF
             Font defaultFont;
-            Color bgYellow = new Color(255,232,165);
-
 
         //HOME WINDOW VARS
             JButton bNewG = new JButton("New Save/Load Save");
@@ -38,7 +40,7 @@ public class GameWindow {
             JButton bSaveButton = new JButton("Save Game"); //NOT YET IMPLEMENTED
 
         //GAME VARS
-            JButton bCont = new JButton("Continue");
+            JButton bCont = new Button("Continue");
             JTextArea userIn;
             boolean gameStartedBool;
             JPanel gamePanel = new JPanel();
@@ -245,6 +247,7 @@ public class GameWindow {
                 homeWindow.repaint();
             
             //set window things
+                homeWindow.setResizable(false);
                 homeWindow.setTitle("Chicken Hunt Launcher");
                 homeWindow.setSize(350, 300);
                 homeWindow.setLocationRelativeTo(null);
@@ -266,7 +269,8 @@ public class GameWindow {
             menu.setBounds(600, 30, 100, 200);
             bToggleMenu.setBounds(600, 0, 100, 30);
         
-            if (!menuToggledBool) { // Menu actions
+            // Menu actions
+            if (!menuToggledBool) { 
                 bToggleMenu.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -274,16 +278,16 @@ public class GameWindow {
                         gameWindow.revalidate();
                         gameWindow.repaint();
                         menuToggledBool = true;
-        
-                        bToggleMenu.addActionListener(new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent e) {
-                                menu.setVisible(false);
-                                gameWindow.revalidate();
-                                gameWindow.repaint();
-                                menuToggledBool = false;
-                            }
-                        });
+                    }
+                });
+            } else {
+                bToggleMenu.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        menu.setVisible(false);
+                        gameWindow.revalidate();
+                        gameWindow.repaint();
+                        menuToggledBool = false;
                     }
                 });
             }
@@ -297,8 +301,8 @@ public class GameWindow {
             menu.setVisible(false);
             
             // Only set background after all components are added
-            //gameWindow.setBackground(bgYellow);
-            gameWindow.getContentPane().setBackground(bgYellow);
+            //gameWindow.setBackground(CHColors.CH_YELLOW);
+            gameWindow.getContentPane().setBackground(CHColors.CH_YELLOW);
         
             // Starting game code
             JButton bPlay = new JButton("Play");
@@ -321,18 +325,21 @@ public class GameWindow {
             gameWindow.add(bPlay); // Add the Play button last, to avoid unnecessary repainting
             gameWindow.setVisible(true);
             gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            gameWindow.setResizable(gameStartedBool);
         }
         
-
     public void beginingCutSceneGui() {
         //set-up 
-            bCont.setBounds(425,410 , 220, 20);
+            //bCont.setForeground(CHColors.CH_YELLOW);
+            bCont.setBounds(425,410 , 220,50);
+            bCont.setPreferredSize(new Dimension(220, 50));
+
+            //gametext
             gameText.setBounds(10, 250, 680, 150);
             //custom font for the gametext
-                Font customFont;
                 try {
                     //create the font to use. Specify the size!
-                    customFont = Font.createFont(Font.TRUETYPE_FONT, new File("ch_remastered/RESOURCES/fonts/home-video-font/HomeVideoBold-R90Dv.ttf")).deriveFont(24f);
+                    Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File("ch_remastered/RESOURCES/fonts/home-video-font/HomeVideo-BLG6G.ttf")).deriveFont(24f);
                     GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
                     //register the font
                     ge.registerFont(customFont);
@@ -344,6 +351,8 @@ public class GameWindow {
                 }
             gameText.setLineWrap(true);
             gameText.setWrapStyleWord(true);
+            gameText.setForeground(CHColors.CH_BLACK);
+            gameText.setBorder(new EmptyBorder(10, 15, 10, 15));
             pacer = 0;
 
             typeWriter(DIALOGUE_CS1[pacer]);
@@ -365,27 +374,20 @@ public class GameWindow {
             gameWindow.repaint();
         
         // Menu actions
-            if (!menuToggledBool) { 
-                bToggleMenu.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
+            bToggleMenu.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (!menuToggledBool) {
                         menu.setVisible(true);
-                        gameWindow.revalidate();
-                        gameWindow.repaint();
                         menuToggledBool = true;
-        
-                        bToggleMenu.addActionListener(new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent e) {
-                                menu.setVisible(false);
-                                gameWindow.revalidate();
-                                gameWindow.repaint();
-                                menuToggledBool = false;
-                            }
-                        });
+                    } else {
+                        menu.setVisible(false);
+                        menuToggledBool = false;
                     }
-                });
-            }
+                    gameWindow.revalidate();
+                    gameWindow.repaint();
+                }
+            });
 
         bCont.addActionListener(new ActionListener() {
             @Override
@@ -403,8 +405,9 @@ public class GameWindow {
                     userIn.getDocument().putProperty("filterNewlines", Boolean.TRUE);
                     bCont. setVisible(false);
                     gameWindow.remove(bCont);
-                    JButton bConfName = new JButton("Confirm");
+                    JButton bConfName = new Button("Confirm");
                     bConfName.setBounds(425,410 , 220, 50);
+                    bConfName.setPreferredSize(new Dimension(220, 50));
 
                     //updating window
                         gameWindow.add(bConfName);
@@ -435,12 +438,14 @@ public class GameWindow {
                     });
                 }
                 if (pacer == 15) {
+                    userIn.setText("");
                     userIn.setVisible(true);
                     userIn.getDocument().putProperty("filterNewlines", Boolean.TRUE);
                     bCont. setVisible(false);
                     gameWindow.remove(bCont);
-                    JButton bConfName = new JButton("Confirm");
+                    JButton bConfName = new Button("Confirm");
                     bConfName.setBounds(425,410 , 220, 50);
+                    bConfName.setPreferredSize(new Dimension(220, 50));
 
                     //updating window
                         gameWindow.add(bConfName);
@@ -452,7 +457,12 @@ public class GameWindow {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             //forcing updates
-                            GameWindow.forceUpdate(DIALOGUE_CS1,Integer.parseInt(userIn.getText()));
+                            if (isInteger(userIn.getText())) {
+                                GameWindow.forceUpdate(DIALOGUE_CS1,Integer.parseInt(userIn.getText()));
+                            } else {
+                                GameWindow.forceUpdate(DIALOGUE_CS1,1000);
+                            }
+                            
 
                             //resetting
                                 bCont. setVisible(true);
@@ -464,6 +474,30 @@ public class GameWindow {
                         }
                     });
                 }
+                if (pacer == 24) {
+                    bCont. setVisible(false);
+                    gameWindow.remove(bCont);
+                    JButton bConfName = new Button("Tutorial");
+                    bConfName.setBounds(425,410 , 220, 50);
+                    bConfName.setPreferredSize(new Dimension(220, 50));
+
+                    //updating window
+                        gameWindow.add(bConfName);
+                        gameWindow.revalidate();
+                        gameWindow.repaint();
+                    
+                    //on click starts the tutorial
+                    bConfName.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            tutorialGUI();
+                            bCont. setVisible(true);
+                            gameWindow.add(bCont);
+                            gameWindow.remove(bConfName);
+                            GameData.incPacer();
+                        }
+                    });
+                }
                 pacer++; // Increment the pacer each time
 
             }             
@@ -471,7 +505,24 @@ public class GameWindow {
     }
 
     public void tutorialGUI() {
+        //bCont button stuff
+        bCont.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //gameText.setText(DIALOGUE_CS1[pacer]);
+                typeWriter(DIALOGUE_TS1[pacer]);
+                gameWindow.revalidate();
+                gameWindow.repaint();
+                //Important bits!!!
+                //13
+                //33
+                pacer++; // Increment the pacer each time
 
+            }             
+        });
+        gameWindow.getContentPane().setBackground(CHColors.CH_BROWN);//tutorialbrown
+        gameWindow.revalidate();
+        gameWindow.repaint();
     }
     
 
@@ -516,6 +567,15 @@ public class GameWindow {
             }
         });
         timer.start();
+    }
+    
+    public static boolean isInteger(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
 

@@ -222,4 +222,11 @@ public class GameData {
             public static void setPacer(int pacer) {
                 GameData.pacer = pacer;
             }
+
+            /**
+             * increases the pacer by 1
+             */
+            public static void incPacer() {
+                GameData.pacer++;
+            }
 }
